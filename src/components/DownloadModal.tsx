@@ -32,15 +32,23 @@ export const DownloadModal = ({ isOpen, onClose }: DownloadModalProps) => {
 
     setIsLoading(true);
     
-    // Simulate loading and redirect
+    // Copy link to clipboard and show instructions
     setTimeout(() => {
-      window.location.href = downloadLink;
-      setIsLoading(false);
-      setPassword("");
-      
-      toast({
-        title: "Redirecionando...",
-        description: "Você será redirecionado para o download do AutoZap.",
+      navigator.clipboard.writeText(downloadLink).then(() => {
+        setIsLoading(false);
+        setPassword("");
+        onClose();
+        
+        toast({
+          title: "Link copiado!",
+          description: "Cole o link em uma nova aba do navegador para acessar o download. Entre em contato se não conseguir acesso.",
+        });
+      }).catch(() => {
+        setIsLoading(false);
+        toast({
+          title: "Link de download",
+          description: "Cole este link em uma nova aba: " + downloadLink,
+        });
       });
     }, 1000);
   };
