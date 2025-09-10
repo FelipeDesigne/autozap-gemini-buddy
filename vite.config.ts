@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Configure base path for GitHub Pages deployment
-  base: mode === "production" ? "./" : "/",
+  // Only use relative base path for production builds (GitHub Pages)
+  base: mode === "production" && process.env.GITHUB_PAGES ? "./" : "/",
   server: {
     host: "::",
     port: 8080,
@@ -20,10 +20,5 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist",
     assetsDir: "assets",
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
   },
 }));
