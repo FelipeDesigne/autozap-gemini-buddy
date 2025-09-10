@@ -34,14 +34,13 @@ export const DownloadModal = ({ isOpen, onClose }: DownloadModalProps) => {
     
     // Simulate loading and redirect
     setTimeout(() => {
-      window.open(downloadLink, '_blank');
+      window.location.href = downloadLink;
       setIsLoading(false);
       setPassword("");
-      onClose();
       
       toast({
-        title: "Download iniciado!",
-        description: "O AutoZap será baixado em uma nova aba.",
+        title: "Redirecionando...",
+        description: "Você será redirecionado para o download do AutoZap.",
       });
     }, 1000);
   };
